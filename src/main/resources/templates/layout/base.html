@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title, body)">
+    <title th:replace="${title}">레이아웃 타이틀</title>
+    <!-- 공통 -->
+    <meta charset="utf-8">
+    <link th:herf="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- 추가 -->
+</head>
+<body th:replace="${body}"></body>

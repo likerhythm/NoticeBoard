@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base :: common_header(~{::title},~{::body})">
+    <meta charset="utf-8">
+    <link th:herf="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>메인 화면</title>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center" th:text="${post.title}">
+        <h2>게시글</h2>
+    </div>
+    <hr class="my-4">
+    <div class="py-5 text-center" th:text="${post.mainText}">
+        <h4>본문</h4>
+    </div>
+    <hr class="my-4">
+    <div>
+        <form action="/comment/save" method="post">
+            <input type="text" id="text" name="text" class="form-control"/>
+            <input type="hidden" id="postId" name="postId" th:value="${post.id}"/>
+            <input type="hidden" id="userId" name="userId" value="1"/>
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">
+                    등록 </button>
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comment : ${comments}">
+            <td th:text="${comment.text}">내용</td>
+            <!--작성자 페이지로 이동 TODO-->
+            <td><a href="savePost.html" th:href="@{|작성자 프로필 링크|}"
+                   th:text="${comment.userId}">
+                작성자</a>
+            </td>
+            <td th:text="${comment.writeDate}">00:00:00</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>

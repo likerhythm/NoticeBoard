@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base :: common_header(~{::title},~{::body})">
+    <meta charset="utf-8">
+    <link th:herf="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>메인 화면</title>
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시글 목록</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    th:onclick="|location.href='@{/post/save}'|" type="button">
+                    게시글 등록</button>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td><a href="savePost.html" th:text="${post.title}"
+                       th:href="@{/post/{itemId}(itemId=${post.id})}">
+                    제목</a>
+                </td>
+                <!--작성자 페이지로 이동 TODO-->
+                <td><a href="savePost.html" th:href="@{|작성자 프로필 링크|}"
+                       th:text="${post.userId}">
+                    작성자</a>
+                </td>
+                <td th:text="${post.writeDate}">00:00:00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
