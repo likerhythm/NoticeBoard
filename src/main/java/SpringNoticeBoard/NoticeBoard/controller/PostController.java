@@ -1,11 +1,10 @@
-package SpringNoticeBoard.NoticeBoard.Controller;
+package SpringNoticeBoard.NoticeBoard.controller;
 
-import SpringNoticeBoard.NoticeBoard.Service.CommentService;
-import SpringNoticeBoard.NoticeBoard.Service.PostService;
+import SpringNoticeBoard.NoticeBoard.service.CommentService;
+import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

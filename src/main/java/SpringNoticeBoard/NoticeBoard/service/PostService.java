@@ -1,4 +1,4 @@
-package SpringNoticeBoard.NoticeBoard.Service;
+package SpringNoticeBoard.NoticeBoard.service;
 
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
 import SpringNoticeBoard.NoticeBoard.domain.post.PostRepository;

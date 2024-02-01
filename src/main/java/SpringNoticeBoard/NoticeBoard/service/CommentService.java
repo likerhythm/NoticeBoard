@@ -1,4 +1,4 @@
-package SpringNoticeBoard.NoticeBoard.Service;
+package SpringNoticeBoard.NoticeBoard.service;
 
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
 import SpringNoticeBoard.NoticeBoard.domain.comment.CommentRepository;

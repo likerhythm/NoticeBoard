@@ -1,7 +1,7 @@
-package SpringNoticeBoard.NoticeBoard.Controller;
+package SpringNoticeBoard.NoticeBoard.controller;
 
-import SpringNoticeBoard.NoticeBoard.Service.CommentService;
-import SpringNoticeBoard.NoticeBoard.Service.PostService;
+import SpringNoticeBoard.NoticeBoard.service.CommentService;
+import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
 import jakarta.annotation.PostConstruct;

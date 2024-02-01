@@ -1,13 +1,32 @@
 package SpringNoticeBoard.NoticeBoard.domain.user;
 
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Slf4j
 @Repository
 public class UserRepository {
 
     private static final Map<Long, User> store = new HashMap<>();
+    private Long sequence = 0L;
+
+    public User add(User user) {
+        user.setId(++sequence);
+        store.put(user.getId(), user);
+        log.info("[ADD USER]={}", user);
+        return user;
+    }
+
+    public User login(LoginForm form) {
+        log.info("[LOGIN]={}", form);
+        return findByEmail(form.getEmail())
+                .filter(u -> u.getPassword().equals(form.getPassword()))
+                .orElse(null);
+    }
 
     //findAll
     public List<User> findAll() {

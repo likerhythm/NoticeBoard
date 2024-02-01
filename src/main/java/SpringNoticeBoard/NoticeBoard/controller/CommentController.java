@@ -1,10 +1,9 @@
-package SpringNoticeBoard.NoticeBoard.Controller;
+package SpringNoticeBoard.NoticeBoard.controller;
 
-import SpringNoticeBoard.NoticeBoard.Service.CommentService;
+import SpringNoticeBoard.NoticeBoard.service.CommentService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentDeleteDto;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentUpdateDto;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
