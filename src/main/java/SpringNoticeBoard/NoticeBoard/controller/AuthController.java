@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,14 +31,15 @@ public class AuthController {
     //로그인
     @PostMapping("/login")
     public String login(@ModelAttribute LoginForm form,
-                        HttpServletRequest request) {
+                        HttpServletRequest request,
+                        @RequestParam(defaultValue = "/main") String redirectURL) {
         User loginUser = userService.login(form);
         if (loginUser == null) {
-            return "redirect:/login";
+            return "redirect:/login?redirectURL=" + redirectURL;
         }
         // 세션에 정보 저장 TODO
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_USER, loginUser);
-        return "redirect:/main";
+        return "redirect:" + redirectURL;
     }
 }
