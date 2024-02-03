@@ -8,12 +8,15 @@ import SpringNoticeBoard.NoticeBoard.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
@@ -22,24 +25,42 @@ public class AuthController {
 
     //회원가입
     @PostMapping("/add")
-    public String addUser(@ModelAttribute AddUserForm form, Model model) {
-        User user = userService.add(form);
+    public String addUser(@ModelAttribute AddUserForm addUserForm,
+                          BindingResult bindingResult,
+                          Model model) {
+        if (bindingResult.hasErrors()) {
+            log.error("errors={}", bindingResult);
+            return "/addUserForm";
+        }
+        User user = userService.add(addUserForm);
         model.addAttribute("user", user);
         return "redirect:/";
     }
 
     //로그인
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginForm form,
+    public String login(@ModelAttribute LoginForm loginForm,
+                        BindingResult bindingResult,
                         HttpServletRequest request,
                         @RequestParam(defaultValue = "/main") String redirectURL) {
-        User loginUser = userService.login(form);
+
+        User loginUser = userService.login(loginForm);
         if (loginUser == null) {
             return "redirect:/login?redirectURL=" + redirectURL;
         }
-        // 세션에 정보 저장 TODO
+        //세션에 정보 저장
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_USER, loginUser);
         return "redirect:" + redirectURL;
+    }
+
+    //로그아웃
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
     }
 }

@@ -2,6 +2,7 @@ package SpringNoticeBoard.NoticeBoard.controller;
 
 import SpringNoticeBoard.NoticeBoard.SessionConst;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
 import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
@@ -34,7 +35,7 @@ public class MainController {
     }
 
     @GetMapping("/add")
-    public String addUserForm(@ModelAttribute User user) {
+    public String addUserForm(@ModelAttribute AddUserForm addUserForm) {
         return "addUserForm";
     }
 
