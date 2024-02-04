@@ -38,8 +38,7 @@
         <tbody>
         <tr th:each="comment : ${comments}">
             <td th:text="${comment.text}">내용</td>
-            <!--작성자 페이지로 이동 TODO-->
-            <td><a href="savePost.html" th:href="@{|작성자 프로필 링크|}"
+            <td><a href="savePost.html" th:href="@{/users(userId=${comment.userId})}"
                    th:text="${comment.userId}">
                 작성자</a>
             </td>

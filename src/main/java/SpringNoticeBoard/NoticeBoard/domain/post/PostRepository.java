@@ -44,7 +44,9 @@ public class PostRepository {
         findPost.setMainText(dto.getMainText());
     }
 
-    //게시글 삭제 TODO
+    public void remove(Long id) {
+        store.remove(id);
+    }
 
     public void clear() {
         store.clear();

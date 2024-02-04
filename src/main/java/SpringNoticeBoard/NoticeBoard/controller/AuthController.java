@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class AuthController {
 
     //회원가입
     @PostMapping("/add")
-    public String addUser(@ModelAttribute AddUserForm addUserForm,
+    public String addUser(@Validated @ModelAttribute AddUserForm addUserForm,
                           BindingResult bindingResult,
                           Model model) {
         if (bindingResult.hasErrors()) {
