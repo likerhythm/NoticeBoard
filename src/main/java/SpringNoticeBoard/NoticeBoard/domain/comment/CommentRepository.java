@@ -14,10 +14,10 @@ public class CommentRepository {
 
     private static final Map<Long, Comment> store = new HashMap<>();
     private static long sequence = 0L;
-    //사용자 이름으로 댓글 찾기
+    //사용자 닉네임으로 댓글 찾기
     public List<Comment> findByUserId(String userId) {
         return store.values().stream()
-                .filter(c -> c.getUserId().equals(userId))
+                .filter(c -> c.getUserName().equals(userId))
                 .collect(Collectors.toList());
     }
 

@@ -44,7 +44,7 @@ public class PostService {
         savePost.setMainText(dto.getMainText());
         savePost.setWriteDate(setDate());
         savePost.setModifyDate("");
-        savePost.setUserId(dto.getUserId());
+        savePost.setUserName(dto.getUserName());
         return savePost;
     }
 

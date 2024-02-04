@@ -38,11 +38,19 @@
         <tbody>
         <tr th:each="comment : ${comments}">
             <td th:text="${comment.text}">내용</td>
-            <td><a href="savePost.html" th:href="@{/users(userId=${comment.userId})}"
-                   th:text="${comment.userId}">
+            <td><a href="savePost.html" th:href="@{/users(userId=${comment.id})}"
+                   th:text="${comment.userName}">
                 작성자</a>
             </td>
             <td th:text="${comment.writeDate}">00:00:00</td>
+            <td>
+                <button th:if="${post.userName == comment.userName}">
+                    수정
+                </button>
+                <button th:if="${post.userName == comment.userName}">
+                    삭제
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>

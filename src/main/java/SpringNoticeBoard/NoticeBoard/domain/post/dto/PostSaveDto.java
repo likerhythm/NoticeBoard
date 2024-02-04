@@ -7,14 +7,14 @@ import lombok.Data;
 public class PostSaveDto {
 
     @NotNull
-    private String userId;
+    private String userName;
     @NotNull
     private String title;
     @NotNull
     private String mainText;
 
-    public PostSaveDto(String userId, String title, String mainText) {
-        this.userId = userId;
+    public PostSaveDto(String userName, String title, String mainText) {
+        this.userName = userName;
         this.title = title;
         this.mainText = mainText;
     }

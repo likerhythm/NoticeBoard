@@ -6,6 +6,8 @@ import lombok.Data;
 public class CommentUpdateDto {
 
     private Long id;
+
     private String text;
+
     private Long postId; //redirect
 }

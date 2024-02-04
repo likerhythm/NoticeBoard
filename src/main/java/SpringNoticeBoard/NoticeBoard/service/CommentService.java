@@ -38,7 +38,7 @@ public class CommentService {
 
     private static Comment setComment(CommentSaveDto dto) {
         Comment saveComment = new Comment();
-        saveComment.setUserId(dto.getUserId());
+        saveComment.setUserName(dto.getUserName());
         saveComment.setText(dto.getText());
         saveComment.setWriteDate(setDate());
         saveComment.setModifyDate("");

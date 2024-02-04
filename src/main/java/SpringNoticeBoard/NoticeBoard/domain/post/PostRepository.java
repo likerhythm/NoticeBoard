@@ -32,7 +32,7 @@ public class PostRepository {
 
     public List<Post> findAllByUser(Long userId) {
         List<Post> posts = store.values().stream()
-                            .filter(p -> p.getUserId().equals(userId))
+                            .filter(p -> p.getUserName().equals(userId))
                             .collect(Collectors.toList());
         log.info("posts={}", posts);
         return posts;

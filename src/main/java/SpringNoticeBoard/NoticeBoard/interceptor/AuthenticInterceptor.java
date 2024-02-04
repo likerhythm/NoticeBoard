@@ -7,6 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AuthenticInterceptor implements HandlerInterceptor {
 
+    //뒤로가기 방지
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
