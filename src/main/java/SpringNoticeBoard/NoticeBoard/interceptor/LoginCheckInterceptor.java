@@ -4,9 +4,11 @@ import SpringNoticeBoard.NoticeBoard.SessionConst;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
 
     @Override
@@ -14,6 +16,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         String requestURI = request.getRequestURI();
         HttpSession session = request.getSession(false);
+        //로그인 상태가 아닌 경우
         if (session == null || session.getAttribute(SessionConst.LOGIN_USER) == null) {
             response.sendRedirect("/login?redirectURL=" + requestURI);
             return false;
@@ -23,7 +26,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+        log.info("[INTERCEPTOR - PostHandler] ModelAndView.getModel()={}", modelAndView.getModel());
     }
 
     @Override

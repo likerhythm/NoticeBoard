@@ -44,10 +44,10 @@
             </td>
             <td th:text="${comment.writeDate}">00:00:00</td>
             <td>
-                <button th:if="${post.userName == comment.userName}">
+                <button th:if="${loginUserName == comment.userName}">
                     수정
                 </button>
-                <button th:if="${post.userName == comment.userName}">
+                <button th:if="${loginUserName == comment.userName}">
                     삭제
                 </button>
             </td>

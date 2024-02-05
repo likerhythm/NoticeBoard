@@ -5,7 +5,9 @@ import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
 import SpringNoticeBoard.NoticeBoard.service.UserService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +43,8 @@ public class AuthController {
     //로그인
     @PostMapping("/login")
     public String login(@ModelAttribute LoginForm loginForm,
-                        BindingResult bindingResult,
                         HttpServletRequest request,
+                        HttpServletResponse response,
                         @RequestParam(defaultValue = "/main") String redirectURL) {
 
         User loginUser = userService.login(loginForm);
@@ -57,7 +59,8 @@ public class AuthController {
 
     //로그아웃
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();

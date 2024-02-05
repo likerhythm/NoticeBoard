@@ -1,10 +1,14 @@
 package SpringNoticeBoard.NoticeBoard.controller;
 
+import SpringNoticeBoard.NoticeBoard.SessionConst;
+import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.service.CommentService;
 import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -35,13 +39,20 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public String post(@PathVariable Long id, Model model) {
+    public String post(@PathVariable Long id, Model model,
+                       HttpServletRequest request) {
         Post findPost = postService.findById(id);
-        //댓글 가져와서 model에 등록 TODO
         List<Comment> findComments = commentService.findByPostId(id);
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return "home";
+        }
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        String loginUserName = loginUser.getName();
 
         model.addAttribute("post", findPost);
         model.addAttribute("comments", findComments);
+        model.addAttribute("loginUserName", loginUserName);
 
         return "post";
     }

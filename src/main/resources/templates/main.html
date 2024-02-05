@@ -40,6 +40,7 @@
                 <th>제목</th>
                 <th>작성자</th>
                 <th>시간</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -53,6 +54,18 @@
                     작성자</a>
                 </td>
                 <td th:text="${post.writeDate}">00:00:00</td>
+                <td>
+                    <button
+                            th:if="${user.name == post.userName}"
+                            >
+                        수정
+                    </button>
+                    <button
+                            th:if="${user.name == post.userName}"
+                            >
+                        삭제
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
