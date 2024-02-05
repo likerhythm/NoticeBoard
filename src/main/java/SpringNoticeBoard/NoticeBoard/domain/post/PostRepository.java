@@ -1,6 +1,6 @@
 package SpringNoticeBoard.NoticeBoard.domain.post;
 
-import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostUpdateDto;
+import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -38,10 +38,11 @@ public class PostRepository {
         return posts;
     }
 
-    public void update(Long id, PostUpdateDto dto) {
+    public void edit(Long id, PostEditDto dto, String modifyDate) {
         Post findPost = findById(id);
         findPost.setTitle(dto.getTitle());
         findPost.setMainText(dto.getMainText());
+        findPost.setModifyDate(modifyDate);
     }
 
     public void remove(Long id) {

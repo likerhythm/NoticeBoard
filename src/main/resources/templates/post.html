@@ -5,8 +5,24 @@
     <link th:herf="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
     <title>메인 화면</title>
+    <style>
+        input:focus{
+            outline: none;
+        }
+
+        .no-border {
+            border-width: 0;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <button class="w-100 btn btn-primary btn-lg"
+            th:onclick="|location.href='@{/}'|">
+        홈
+    </button>
+</div>
+
 <div class="container">
     <div class="py-5 text-center" th:text="${post.title}">
         <h2>게시글</h2>
@@ -36,22 +52,29 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="comment : ${comments}">
-            <td th:text="${comment.text}">내용</td>
-            <td><a href="savePost.html" th:href="@{/users(userId=${comment.id})}"
-                   th:text="${comment.userName}">
-                작성자</a>
-            </td>
-            <td th:text="${comment.writeDate}">00:00:00</td>
-            <td>
-                <button th:if="${loginUserName == comment.userName}">
-                    수정
-                </button>
-                <button th:if="${loginUserName == comment.userName}">
-                    삭제
-                </button>
-            </td>
-        </tr>
+            <tr th:each="comment : ${comments}">
+                <td th:text="${comment.text}"></td>
+                <td><a href="savePost.html" th:href="@{/users(userId=${comment.id})}"
+                       th:text="${comment.userName}">
+                    작성자</a>
+                </td>
+                <td th:text="${comment.writeDate}">00:00:00</td>
+                <td>
+                    <form method="post" action="/comment/remove">
+                        <input type="hidden" name="id" th:value="${comment.id}"/>
+                        <input type="hidden" name="postId" th:value="${post.id}"/>
+                        <button th:if="${loginUserName == comment.userName}"
+                                type="button"
+                                th:onclick="|location.href='@{/comment/update/{id}(id=${comment.id})}'|">
+                            수정
+                        </button>
+                        <button th:if="${loginUserName == comment.userName}"
+                                type="submit">
+                            삭제
+                        </button>
+                    </form>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

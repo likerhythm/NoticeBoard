@@ -3,7 +3,7 @@ package SpringNoticeBoard.NoticeBoard.service;
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
 import SpringNoticeBoard.NoticeBoard.domain.post.PostRepository;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
-import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostUpdateDto;
+import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +29,18 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public void update(Long id, PostUpdateDto dto) {
-        postRepository.update(id, dto);
+    public void edit(Long id, PostEditDto dto) {
+        String modifiedDate = setDate();
+        postRepository.edit(id, dto, modifiedDate);
     }
 
     public Post save(PostSaveDto dto) {
         Post savePost = setPost(dto);
         return postRepository.save(savePost);
+    }
+
+    public void remove(Long id) {
+        postRepository.remove(id);
     }
 
     private static Post setPost(PostSaveDto dto) {

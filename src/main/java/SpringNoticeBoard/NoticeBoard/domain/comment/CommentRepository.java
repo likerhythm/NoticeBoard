@@ -21,6 +21,10 @@ public class CommentRepository {
                 .collect(Collectors.toList());
     }
 
+    public Comment findById(Long id) {
+        return store.get(id);
+    }
+
     //게시글별 댓글 찾기
     public List<Comment> findByPostId(Long postId) {
         return store.values().stream()
@@ -36,7 +40,7 @@ public class CommentRepository {
     }
 
     //댓글 삭제
-    public void delete(Long id) {
+    public void remove(Long id) {
         store.remove(id);
     }
 

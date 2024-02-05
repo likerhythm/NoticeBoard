@@ -22,8 +22,8 @@ public class CommentService {
         commentRepository.save(saveComment);
     }
     //댓글 삭제
-    public void delete(Long id) {
-        commentRepository.delete(id);
+    public void remove(Long id) {
+        commentRepository.remove(id);
     }
 
     //댓글 수정

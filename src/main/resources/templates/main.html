@@ -57,12 +57,13 @@
                 <td>
                     <button
                             th:if="${user.name == post.userName}"
+                            th:onclick="|location.href='@{/post/{postId}/edit(postId=${post.id})}'|"
                             >
                         수정
                     </button>
                     <button
                             th:if="${user.name == post.userName}"
-                            >
+                            th:onclick="|location.href='@{/post/{postId}/remove(postId=${post.id})}'|">
                         삭제
                     </button>
                 </td>

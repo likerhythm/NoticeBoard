@@ -1,6 +1,7 @@
 package SpringNoticeBoard.NoticeBoard.controller;
 
 import SpringNoticeBoard.NoticeBoard.SessionConst;
+import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.service.CommentService;
 import SpringNoticeBoard.NoticeBoard.service.PostService;
@@ -27,7 +28,13 @@ public class PostController {
     private final CommentService commentService;
 
     @GetMapping("/save")
-    public String savePost() {
+    public String savePost(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        String loginUserName = loginUser.getName();
+        model.addAttribute("loginUserName", loginUserName);
+
         return "savePost";
     }
 
@@ -55,5 +62,29 @@ public class PostController {
         model.addAttribute("loginUserName", loginUserName);
 
         return "post";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Post editPost = postService.findById(id);
+        PostEditDto dto = new PostEditDto(id, editPost.getTitle(), editPost.getMainText());
+
+        model.addAttribute("post", dto);
+
+        return "editPost";
+    }
+
+    @GetMapping("/{id}/remove")
+    public String remove(@PathVariable Long id) {
+
+        postService.remove(id);
+        return "redirect:/";
+    }
+
+    @PostMapping("edit")
+    public String edit(@ModelAttribute PostEditDto dto) {
+
+        postService.edit(dto.getId(), dto);
+        return "redirect:/";
     }
 }
