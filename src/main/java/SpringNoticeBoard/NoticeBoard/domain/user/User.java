@@ -5,6 +5,7 @@ import SpringNoticeBoard.NoticeBoard.validator.annotation.WithoutSpace;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
@@ -30,4 +31,7 @@ public class User {
 
     @Range(min = 10, max = 100)
     private int age;         //나이
+
+    @Size(min = 0, max = 50)
+    private String introduction; //자기소개
 }

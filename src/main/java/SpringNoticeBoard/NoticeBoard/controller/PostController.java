@@ -1,6 +1,7 @@
 package SpringNoticeBoard.NoticeBoard.controller;
 
 import SpringNoticeBoard.NoticeBoard.SessionConst;
+import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.service.CommentService;
@@ -60,6 +61,7 @@ public class PostController {
         model.addAttribute("post", findPost);
         model.addAttribute("comments", findComments);
         model.addAttribute("loginUserName", loginUserName);
+        model.addAttribute("commentSave", new CommentSaveDto());
 
         return "post";
     }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .profile-container {
+            width: 1000px;
+            height: 500px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image {
+            border-radius: 50%;
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-bio {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .post-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .post-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        /* 전체 폼 스타일 */
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        /* 입력란 스타일 */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 5px 7.5px; /* 크기를 반으로 줄임 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 버튼 호버 효과 */
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* 버튼 비활성화 스타일 */
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+<div class="profile-container">
+<!--    <img class="profile-image" src="profile-image.jpg" alt="User Profile Image">-->
+    <div class="profile-name" th:text="${profileData.name}">사용자 이름</div>
+    <div class="profile-bio" th:text="${profileData.introduction}">안녕하세요! 저는 사용자에 대한 간단한 소개가 여기에 들어갑니다.</div>
+    <button onclick="toggleForm()">자기소개 수정</button>
+    <form id="editForm" method="post" action="/profile/edit" th:object="${profileData}"
+            style="display: none">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{introduction}"/>
+        <button type="submit">확인</button>
+    </form>
+
+    <h2>게시글 목록</h2>
+    <ul class="post-list">
+        <li class="post-item" th:each="post : ${profileData.posts}">
+            <a th:text="${post.title}" th:href="@{/post/{itemId}(itemId=${post.id})}">게시글 제목</a>
+        </li>
+        <!-- 추가적인 게시글은 이곳에 계속해서 추가하세요 -->
+    </ul>
+</div>
+<script>
+    function toggleForm() {
+        var form = document.getElementById("editForm");
+        form.style.display = "block";
+    }
+    </script>
+</body>
+</html>

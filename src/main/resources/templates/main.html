@@ -49,7 +49,7 @@
                        th:href="@{/post/{itemId}(itemId=${post.id})}">
                     제목</a>
                 </td>
-                <td><a href="savePost.html" th:href="@{/users(userName=${post.userName})}"
+                <td><a href="savePost.html" th:href="@{/profile/{userName}(userName=${post.userName})}"
                        th:text="${post.userName}">
                     작성자</a>
                 </td>

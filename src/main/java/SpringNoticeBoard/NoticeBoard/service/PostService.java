@@ -21,8 +21,8 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public List<Post> findAllByUser(Long id) {
-        return postRepository.findAllByUser(id);
+    public List<Post> findAllByUser(String userName) {
+        return postRepository.findAllByUser(userName);
     }
 
     public List<Post> findAll() {

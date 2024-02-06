@@ -30,9 +30,9 @@ public class PostRepository {
         return new ArrayList<>(store.values());
     }
 
-    public List<Post> findAllByUser(Long userId) {
+    public List<Post> findAllByUser(String userName) {
         List<Post> posts = store.values().stream()
-                            .filter(p -> p.getUserName().equals(userId))
+                            .filter(p -> p.getUserName().equals(userName))
                             .collect(Collectors.toList());
         log.info("posts={}", posts);
         return posts;

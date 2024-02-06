@@ -1,9 +1,13 @@
 package SpringNoticeBoard.NoticeBoard.service;
 
+import SpringNoticeBoard.NoticeBoard.domain.post.Post;
+import SpringNoticeBoard.NoticeBoard.domain.post.PostRepository;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.domain.user.UserRepository;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileDto;
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileEditDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +20,17 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     public User add(AddUserForm form) {
         User user = setUser(form);
         return userRepository.add(user);
+    }
+
+    public UserProfileDto edit(UserProfileEditDto dto) {
+        User user = userRepository.edit(dto);
+        List<Post> posts = postRepository.findAllByUser(user.getName());
+        return new UserProfileDto(user, posts);
     }
 
     public User login(LoginForm form) {

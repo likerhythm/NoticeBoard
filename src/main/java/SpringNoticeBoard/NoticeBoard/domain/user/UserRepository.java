@@ -2,6 +2,7 @@ package SpringNoticeBoard.NoticeBoard.domain.user;
 
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
+import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileEditDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +27,11 @@ public class UserRepository {
         return findByEmail(form.getEmail())
                 .filter(u -> u.getPassword().equals(form.getPassword()))
                 .orElse(null);
+    }
+
+    public User edit(UserProfileEditDto user) {
+        store.get(user.getId()).setIntroduction(user.getIntroduction());
+        return store.get(user.getId());
     }
 
     //findAll
