@@ -6,6 +6,7 @@ import SpringNoticeBoard.NoticeBoard.service.CommentService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentDeleteDto;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentUpdateDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,12 +27,14 @@ public class CommentController {
     //댓글 등록
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute CommentSaveDto dto,
-                       BindingResult bindingResult) {
+                       BindingResult bindingResult,
+                       HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             log.error("error={}", bindingResult);
             return "redirect:/post/" + dto.getPostId();
         }
-        commentService.save(dto);
+        String loginUserName = (String) request.getAttribute("loginUserName");
+        commentService.save(dto, loginUserName);
         return "redirect:/post/" + dto.getPostId();
     }
 

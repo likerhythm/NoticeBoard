@@ -8,6 +8,7 @@ import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileDto;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileEditDto;
 import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,12 @@ public class UserController {
     private final PostService postService;
 
     @GetMapping("/profile/{name}")
-    public String profile(@PathVariable String name, Model model) {
+    public String profile(@PathVariable String name, Model model, HttpServletRequest request) {
         User user = userService.findByName(name);
         List<Post> posts = postService.findAllByUser(name);
         UserProfileDto dto = new UserProfileDto(user, posts);
         model.addAttribute("profileData", dto);
+        model.addAttribute("loginUserName", request.getAttribute("loginUserName"));
         return "profile";
     }
 

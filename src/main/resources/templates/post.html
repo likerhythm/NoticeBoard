@@ -57,7 +57,6 @@
         <form action="/comment/save" method="post" th:object="${commentSave}">
             <input type="text" id="text" th:field="*{text}" class="form-control" th:errorclass="field-error"/>
             <input type="hidden" id="postId" name="postId" th:value="${post.id}"/>
-            <input type="hidden" id="userName" name="userName" th:value="${loginUserName}"/>
             <div class="field-error" th:errors="*{text}">
                 댓글 오류
             </div>
@@ -87,12 +86,12 @@
                     <form method="post" action="/comment/remove">
                         <input type="hidden" name="id" th:value="${comment.id}"/>
                         <input type="hidden" name="postId" th:value="${post.id}"/>
-                        <button th:if="${loginUserName == comment.userName}"
+                        <button th:if="${loginUserName != null && loginUserName == comment.userName}"
                                 type="button"
                                 th:onclick="|location.href='@{/comment/update/{id}(id=${comment.id})}'|">
                             수정
                         </button>
-                        <button th:if="${loginUserName == comment.userName}"
+                        <button th:if="${loginUserName != null && loginUserName == comment.userName}"
                                 type="submit">
                             삭제
                         </button>

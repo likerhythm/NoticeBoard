@@ -9,15 +9,11 @@ import lombok.NoArgsConstructor;
 public class CommentSaveDto {
 
     @NotBlank
-    private String userName;
-
-    @NotBlank
     private String text;
 
     private Long postId;
 
-    public CommentSaveDto(String userName, String text, Long postId) {
-        this.userName = userName;
+    public CommentSaveDto(String text, Long postId) {
         this.text = text;
         this.postId = postId;
     }

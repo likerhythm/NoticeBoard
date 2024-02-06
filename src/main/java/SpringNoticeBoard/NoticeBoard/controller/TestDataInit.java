@@ -1,5 +1,7 @@
 package SpringNoticeBoard.NoticeBoard.controller;
 
+import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
+import SpringNoticeBoard.NoticeBoard.domain.comment.CommentRepository;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.service.CommentService;
@@ -7,6 +9,7 @@ import SpringNoticeBoard.NoticeBoard.service.PostService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
 import SpringNoticeBoard.NoticeBoard.service.UserService;
+import SpringNoticeBoard.NoticeBoard.utils.TimeValue;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,6 +20,7 @@ public class TestDataInit {
 
     private final PostService postService;
     private final CommentService commentService;
+    private final CommentRepository commentRepository;
     private final UserService userService;
 
     @PostConstruct
@@ -27,10 +31,10 @@ public class TestDataInit {
 
     @PostConstruct
     public void initComment() {
-        commentService.save(new CommentSaveDto("test1", "테스트 댓글1", 1L));
-        commentService.save(new CommentSaveDto("test2", "테스트 댓글2", 1L));
-        commentService.save(new CommentSaveDto("test1", "테스트 댓글3", 2L));
-        commentService.save(new CommentSaveDto("test2", "테스트 댓글4", 2L));
+        commentRepository.save(new Comment(100L, "test1", "테스트 댓글1", TimeValue.setDate(), "", 1L));
+        commentRepository.save(new Comment(101L, "test2", "테스트 댓글2", TimeValue.setDate(), "", 1L));
+        commentRepository.save(new Comment(102L, "test1", "테스트 댓글3", TimeValue.setDate(), "", 2L));
+        commentRepository.save(new Comment(103L, "test2", "테스트 댓글4", TimeValue.setDate(), "", 2L));
     }
 
     @PostConstruct

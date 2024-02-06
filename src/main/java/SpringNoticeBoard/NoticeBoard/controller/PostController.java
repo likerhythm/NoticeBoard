@@ -55,8 +55,10 @@ public class PostController {
         if (session == null) {
             return "home";
         }
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-        String loginUserName = loginUser.getName();
+        String loginUserName = (String) request.getAttribute("loginUserName");
+        if (loginUserName == null) {
+            loginUserName = "null";
+        }
 
         model.addAttribute("post", findPost);
         model.addAttribute("comments", findComments);

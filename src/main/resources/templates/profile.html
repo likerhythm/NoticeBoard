@@ -104,7 +104,7 @@
 <!--    <img class="profile-image" src="profile-image.jpg" alt="User Profile Image">-->
     <div class="profile-name" th:text="${profileData.name}">사용자 이름</div>
     <div class="profile-bio" th:text="${profileData.introduction}">안녕하세요! 저는 사용자에 대한 간단한 소개가 여기에 들어갑니다.</div>
-    <button onclick="toggleForm()">자기소개 수정</button>
+    <button th:if="${loginUserName == profileData.name}" onclick="toggleForm()">자기소개 수정</button>
     <form id="editForm" method="post" action="/profile/edit" th:object="${profileData}"
             style="display: none">
         <input type="hidden" th:field="*{id}"/>

@@ -1,6 +1,7 @@
 package SpringNoticeBoard.NoticeBoard.interceptor;
 
 import SpringNoticeBoard.NoticeBoard.SessionConst;
+import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +22,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             response.sendRedirect("/login?redirectURL=" + requestURI);
             return false;
         }
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        request.setAttribute("loginUserName", loginUser.getName());
         return true;
     }
 

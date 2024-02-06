@@ -3,6 +3,7 @@ package SpringNoticeBoard.NoticeBoard.service;
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
 import SpringNoticeBoard.NoticeBoard.domain.comment.CommentRepository;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
+import SpringNoticeBoard.NoticeBoard.utils.TimeValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     //댓글 작성
-    public void save(CommentSaveDto dto) {
-        Comment saveComment = setComment(dto);
+    public void save(CommentSaveDto dto, String loginUserName) {
+        Comment saveComment = setComment(dto, loginUserName);
         commentRepository.save(saveComment);
     }
     //댓글 삭제
@@ -36,20 +37,13 @@ public class CommentService {
         return commentRepository.findByPostId(id);
     }
 
-    private static Comment setComment(CommentSaveDto dto) {
+    private static Comment setComment(CommentSaveDto dto, String loginUsername) {
         Comment saveComment = new Comment();
-        saveComment.setUserName(dto.getUserName());
+        saveComment.setUserName(loginUsername);
         saveComment.setText(dto.getText());
-        saveComment.setWriteDate(setDate());
+        saveComment.setWriteDate(TimeValue.setDate());
         saveComment.setModifyDate("");
         saveComment.setPostId(dto.getPostId());
         return saveComment;
-    }
-
-    private static String setDate() {
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateToString = dateFormat.format(date);
-        return dateToString;
     }
 }

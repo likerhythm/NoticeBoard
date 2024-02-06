@@ -7,20 +7,29 @@
     <title>메인 화면</title>
 </head>
 <body>
-<div>
+<div th:if="${user.name != null}">
     <form th:action="@{/logout}" method="post">
         <button class="btn btn-primary float-end" type="submit">
             로그아웃
         </button>
     </form>
 </div>
+<div th:if="${user.name == null}">
+    <button class="btn btn-primary float-end"
+            th:onclick="|location.href='@{/}'|">
+        로그인</button>
+</div>
 <div class="container" style="max-width: 600px">
-    <div class="py-5 text-center">
-        <h2>사용자 정보</h2>
+    <!--사용자 정보-->
+    <div th:if="${user.name != null}">
+        <div class="py-5 text-center">
+            <h2>사용자 정보</h2>
+        </div>
+        <div class="col" th:object="${user}">
+            <h3 th:text="*{name}" th:field="*{name}"></h3>
+        </div>
     </div>
-    <div class="col" th:object="${user}">
-        <h3 th:text="*{name}" th:field="*{name}"></h3>
-    </div>
+    <!--게시글 목록-->
     <div class="py-5 text-center">
         <h2>게시글 목록</h2>
     </div>

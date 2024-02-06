@@ -15,10 +15,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new AuthenticInterceptor())
                 .order(1)
                 .addPathPatterns("/**");
+
+        //로그인 체크
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/add", "/login", "/logout",
-                        "/css/**", "/*.ico", "/error");
+                        "/css/**", "/*.ico", "/error", "/main", "/post/*", "/profile/*");
     }
 }

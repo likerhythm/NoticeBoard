@@ -50,12 +50,13 @@ public class MainController {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
 
-        if (loginUser == null) {
-            return "redirect:/";
+        if (loginUser != null) {
+            model.addAttribute("user", loginUser);
+        } else {
+            model.addAttribute("user", new User());
         }
 
         List<Post> posts = postService.findAll();
-        model.addAttribute("user", loginUser);
         model.addAttribute("posts", posts);
         return "main";
     }

@@ -65,6 +65,6 @@ public class AuthController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return "redirect:/main";
     }
 }
