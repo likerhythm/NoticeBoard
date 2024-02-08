@@ -17,13 +17,26 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         String requestURI = request.getRequestURI();
         HttpSession session = request.getSession(false);
-        //로그인 상태가 아닌 경우
-        if (session == null || session.getAttribute(SessionConst.LOGIN_USER) == null) {
+        log.info("[PREHANDLE]requestURI={}", requestURI);
+
+        if ("/post/save".equals(requestURI)) {
             response.sendRedirect("/login?redirectURL=" + requestURI);
             return false;
         }
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-        request.setAttribute("loginUserName", loginUser.getName());
+        //로그인 상태가 아닌 경우
+        if (session == null || session.getAttribute(SessionConst.LOGIN_USER) == null) {
+            if (!requestURI.startsWith("/post")) {
+                response.sendRedirect("/login?redirectURL=" + requestURI);
+                return false;
+            }
+        }
+        String loginUserName;
+        if (session != null) {
+            loginUserName = ((User) session.getAttribute(SessionConst.LOGIN_USER)).getName();
+        } else {
+            loginUserName = "";
+        }
+        request.setAttribute("loginUserName", loginUserName);
         return true;
     }
 
