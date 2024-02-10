@@ -29,7 +29,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         String loginUserName;
-        if (session != null) {
+        if (session != null && session.getAttribute(SessionConst.LOGIN_USER) == null) {
             loginUserName = ((User) session.getAttribute(SessionConst.LOGIN_USER)).getName();
         } else {
             loginUserName = "";

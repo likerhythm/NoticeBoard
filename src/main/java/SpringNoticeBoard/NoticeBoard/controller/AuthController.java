@@ -42,10 +42,14 @@ public class AuthController {
 
     //로그인
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginForm loginForm,
+    public String login(@ModelAttribute @Validated LoginForm loginForm,
+                        BindingResult bindingResult,
                         HttpServletRequest request,
-                        HttpServletResponse response,
                         @RequestParam(defaultValue = "/main") String redirectURL) {
+
+        if (bindingResult.hasErrors()) {
+            return "/loginForm";
+        }
 
         User loginUser = userService.login(loginForm);
         if (loginUser == null) {

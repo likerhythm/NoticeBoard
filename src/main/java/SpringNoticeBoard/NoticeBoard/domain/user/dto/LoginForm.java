@@ -13,7 +13,6 @@ public class LoginForm {
     @Email
     private String email;
 
-    @NotBlank
     @Length(min = 1, max = 20)
     @WithoutSpace
     private String password;
