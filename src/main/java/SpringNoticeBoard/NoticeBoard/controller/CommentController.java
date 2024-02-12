@@ -33,9 +33,13 @@ public class CommentController {
             log.error("error={}", bindingResult);
             return "redirect:/post/" + dto.getPostId();
         }
+        saveComment(dto, request);
+        return "redirect:/post/" + dto.getPostId();
+    }
+
+    private void saveComment(CommentSaveDto dto, HttpServletRequest request) {
         String loginUserName = (String) request.getAttribute("loginUserName");
         commentService.save(dto, loginUserName);
-        return "redirect:/post/" + dto.getPostId();
     }
 
     //댓글 삭제

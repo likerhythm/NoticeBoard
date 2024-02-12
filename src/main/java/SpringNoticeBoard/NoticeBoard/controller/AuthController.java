@@ -31,13 +31,17 @@ public class AuthController {
     public String addUser(@Validated @ModelAttribute AddUserForm addUserForm,
                           BindingResult bindingResult,
                           Model model) {
-        if (bindingResult.hasErrors()) {
+        if (hasBindingError(bindingResult)) {
             log.error("errors={}", bindingResult);
             return "/addUserForm";
         }
+        addUser(addUserForm, model);
+        return "redirect:/";
+    }
+
+    private void addUser(AddUserForm addUserForm, Model model) {
         User user = userService.add(addUserForm);
         model.addAttribute("user", user);
-        return "redirect:/";
     }
 
     //로그인
@@ -47,7 +51,7 @@ public class AuthController {
                         HttpServletRequest request,
                         @RequestParam(defaultValue = "/main") String redirectURL) {
 
-        if (bindingResult.hasErrors()) {
+        if (hasBindingError(bindingResult)) {
             return "/loginForm";
         }
 
@@ -56,9 +60,17 @@ public class AuthController {
             return "redirect:/login?redirectURL=" + redirectURL;
         }
         //세션에 정보 저장
+        setSession(request, loginUser);
+        return "redirect:" + redirectURL;
+    }
+
+    private static boolean hasBindingError(BindingResult bindingResult) {
+        return bindingResult.hasErrors();
+    }
+
+    private static void setSession(HttpServletRequest request, User loginUser) {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_USER, loginUser);
-        return "redirect:" + redirectURL;
     }
 
     //로그아웃

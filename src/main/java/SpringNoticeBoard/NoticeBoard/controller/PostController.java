@@ -31,12 +31,17 @@ public class PostController {
     @GetMapping("/save")
     public String savePost(HttpServletRequest request, Model model) {
 
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        User loginUser = setSession(request);
         String loginUserName = loginUser.getName();
         model.addAttribute("loginUserName", loginUserName);
 
         return "savePost";
+    }
+
+    private static User setSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        return loginUser;
     }
 
     @PostMapping
@@ -55,17 +60,25 @@ public class PostController {
         if (session == null) {
             return "home";
         }
+        String loginUserName = setLoginUserName(request);
+        setModelAttribute(model, findPost, findComments, loginUserName);
+
+        return "post";
+    }
+
+    private static String setLoginUserName(HttpServletRequest request) {
         String loginUserName = (String) request.getAttribute("loginUserName");
         if (loginUserName == null) {
             loginUserName = "null";
         }
+        return loginUserName;
+    }
 
+    private static void setModelAttribute(Model model, Post findPost, List<Comment> findComments, String loginUserName) {
         model.addAttribute("post", findPost);
         model.addAttribute("comments", findComments);
         model.addAttribute("loginUserName", loginUserName);
         model.addAttribute("commentSave", new CommentSaveDto());
-
-        return "post";
     }
 
     @GetMapping("/{id}/edit")

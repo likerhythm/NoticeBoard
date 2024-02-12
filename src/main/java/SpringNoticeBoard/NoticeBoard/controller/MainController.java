@@ -25,13 +25,18 @@ public class MainController {
     @GetMapping("/")
     public String home(HttpServletRequest request) {
 
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        User loginUser = setSession(request);
 
         if (loginUser != null) {
             return "redirect:/main";
         }
         return "home";
+    }
+
+    private static User setSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        return loginUser;
     }
 
     @GetMapping("/add")
@@ -47,17 +52,20 @@ public class MainController {
     @GetMapping("/main")
     public String main(Model model, HttpServletRequest request) {
 
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        User loginUser = setSession(request);
 
+        setLoginUser(model, loginUser);
+
+        List<Post> posts = postService.findAll();
+        model.addAttribute("posts", posts);
+        return "main";
+    }
+
+    private static void setLoginUser(Model model, User loginUser) {
         if (loginUser != null) {
             model.addAttribute("user", loginUser);
         } else {
             model.addAttribute("user", new User());
         }
-
-        List<Post> posts = postService.findAll();
-        model.addAttribute("posts", posts);
-        return "main";
     }
 }
