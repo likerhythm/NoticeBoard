@@ -16,22 +16,23 @@ public class MyBatisPostRepository implements PostRepository {
 
     @Override
     public Post save(Post post) {
-        return null;
+        postMapper.save(post);
+        return postMapper.findById(post.getId());
     }
 
     @Override
     public Post findById(Long id) {
-        return null;
+        return postMapper.findById(id);
     }
 
     @Override
     public List<Post> findAll() {
-        return null;
+        return postMapper.findAll();
     }
 
     @Override
     public List<Post> findAllByUser(String userName) {
-        return null;
+        return postMapper.findAllByUser(userName);
     }
 
     @Override

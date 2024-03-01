@@ -8,6 +8,11 @@
         values(#{writeDate}, #{modifyDate}, #{userName}, #{title}, #{mainText})
     </insert>
 
+    <select id="findAll" resultType="Post">
+        select id, write_date, modify_date, user_name, title, main_text
+        from post
+    </select>
+
     <select id="findById" resultType="Post">
         select id, write_date, modify_date, user_name, title, main_text
         from post

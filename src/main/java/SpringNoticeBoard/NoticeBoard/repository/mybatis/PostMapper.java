@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface PostMapper {
 
-    Post save(Post post);
+    void save(Post post);
 
     Post findById(Long id);
 
