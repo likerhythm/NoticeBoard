@@ -1,5 +1,6 @@
-package SpringNoticeBoard.NoticeBoard.domain.comment;
+package SpringNoticeBoard.NoticeBoard.repository.memoryrepository;
 
+import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
-public class CommentRepository {
+public class MemoryCommentRepository {
 
     private static final Map<Long, Comment> store = new HashMap<>();
     private static long sequence = 0L;

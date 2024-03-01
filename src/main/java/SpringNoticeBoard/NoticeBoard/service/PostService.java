@@ -1,7 +1,8 @@
 package SpringNoticeBoard.NoticeBoard.service;
 
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
-import SpringNoticeBoard.NoticeBoard.domain.post.PostRepository;
+import SpringNoticeBoard.NoticeBoard.repository.PostRepository;
+import SpringNoticeBoard.NoticeBoard.repository.memoryrepository.MemoryPostRepository;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostSaveDto;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import lombok.RequiredArgsConstructor;

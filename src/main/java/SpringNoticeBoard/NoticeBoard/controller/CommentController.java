@@ -1,7 +1,8 @@
 package SpringNoticeBoard.NoticeBoard.controller;
 
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
-import SpringNoticeBoard.NoticeBoard.domain.comment.CommentRepository;
+import SpringNoticeBoard.NoticeBoard.repository.CommentRepository;
+import SpringNoticeBoard.NoticeBoard.repository.memoryrepository.MemoryCommentRepository;
 import SpringNoticeBoard.NoticeBoard.service.CommentService;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentDeleteDto;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;

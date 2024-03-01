@@ -1,4 +1,4 @@
-package SpringNoticeBoard.NoticeBoard;
+package SpringNoticeBoard.NoticeBoard.config;
 
 import SpringNoticeBoard.NoticeBoard.interceptor.AuthenticInterceptor;
 import SpringNoticeBoard.NoticeBoard.interceptor.LoginCheckInterceptor;

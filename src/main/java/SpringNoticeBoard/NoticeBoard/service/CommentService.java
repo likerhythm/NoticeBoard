@@ -1,14 +1,13 @@
 package SpringNoticeBoard.NoticeBoard.service;
 
 import SpringNoticeBoard.NoticeBoard.domain.comment.Comment;
-import SpringNoticeBoard.NoticeBoard.domain.comment.CommentRepository;
+import SpringNoticeBoard.NoticeBoard.repository.CommentRepository;
+import SpringNoticeBoard.NoticeBoard.repository.memoryrepository.MemoryCommentRepository;
 import SpringNoticeBoard.NoticeBoard.domain.comment.dto.CommentSaveDto;
 import SpringNoticeBoard.NoticeBoard.utils.TimeValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service

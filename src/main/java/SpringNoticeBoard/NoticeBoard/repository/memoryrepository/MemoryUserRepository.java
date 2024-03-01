@@ -1,8 +1,9 @@
-package SpringNoticeBoard.NoticeBoard.domain.user;
+package SpringNoticeBoard.NoticeBoard.repository.memoryrepository;
 
-import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
+import SpringNoticeBoard.NoticeBoard.domain.user.User;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileEditDto;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -10,12 +11,12 @@ import java.util.*;
 
 @Slf4j
 @Repository
-public class UserRepository {
+public class MemoryUserRepository {
 
     private static final Map<Long, User> store = new HashMap<>();
     private Long sequence = 0L;
 
-    public User add(User user) {
+    public User add(@NotNull User user) {
         user.setId(++sequence);
         store.put(user.getId(), user);
         log.info("[ADD USER]={}", user);

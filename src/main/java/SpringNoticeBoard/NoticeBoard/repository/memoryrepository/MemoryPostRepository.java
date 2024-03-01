@@ -1,5 +1,6 @@
-package SpringNoticeBoard.NoticeBoard.domain.post;
+package SpringNoticeBoard.NoticeBoard.repository.memoryrepository;
 
+import SpringNoticeBoard.NoticeBoard.domain.post.Post;
 import SpringNoticeBoard.NoticeBoard.domain.post.dto.PostEditDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 @Slf4j
 @Repository
-public class PostRepository {
+public class MemoryPostRepository {
 
     private static final Map<Long, Post> store = new HashMap<>();
     private static long sequence = 0L;

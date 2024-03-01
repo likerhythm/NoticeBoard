@@ -1,9 +1,11 @@
 package SpringNoticeBoard.NoticeBoard.service;
 
 import SpringNoticeBoard.NoticeBoard.domain.post.Post;
-import SpringNoticeBoard.NoticeBoard.domain.post.PostRepository;
+import SpringNoticeBoard.NoticeBoard.repository.PostRepository;
+import SpringNoticeBoard.NoticeBoard.repository.UserRepository;
+import SpringNoticeBoard.NoticeBoard.repository.memoryrepository.MemoryPostRepository;
 import SpringNoticeBoard.NoticeBoard.domain.user.User;
-import SpringNoticeBoard.NoticeBoard.domain.user.UserRepository;
+import SpringNoticeBoard.NoticeBoard.repository.memoryrepository.MemoryUserRepository;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.AddUserForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.LoginForm;
 import SpringNoticeBoard.NoticeBoard.domain.user.dto.UserProfileDto;
@@ -34,7 +36,9 @@ public class UserService {
     }
 
     public User login(LoginForm form) {
-        return userRepository.login(form);
+        return userRepository.findByEmail(form.getEmail())
+                .filter(u -> u.getPassword().equals(form.getPassword()))
+                .orElse(null);
     }
 
     private static User setUser(AddUserForm form) {

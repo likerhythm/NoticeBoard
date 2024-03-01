@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SpringNoticeBoard.NoticeBoard.repository.mybatis.UserMapper">
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into user1 (email, password, join_date, name, age, introduction)
+        values (#{email}, #{password}, #{joinDate}, #{name}, #{age}, #{introduction})
+    </insert>
+
+    <update id="editUser">
+        update user1
+        set introduction = #{user.introduction}
+        where id = #{user.id}
+    </update>
+
+    <select id="findAll" resultType="User">
+        select id, email, password, join_date, name, age, introduction
+        from user1
+    </select>
+
+    <select id="findByEmail" resultType="User">
+        select id, email, password, join_date, name, age, introduction
+        from user1
+        where email = #{email}
+    </select>
+
+    <select id="findByName" resultType="User">
+        select id, email, password, join_date, name, age, introduction
+        from user1
+        where name = #{name}
+    </select>
+
+    <select id="findByIdUser" resultType="User">
+        select id, email, password, join_date, name, age, introduction
+        from user1
+        where id = #{id}
+    </select>
+
+    <delete id="removeUser">
+        delete from user1
+        where id = #{id}
+    </delete>
+
+</mapper>

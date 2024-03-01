@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SpringNoticeBoard.NoticeBoard.repository.mybatis.CommentMapper">
+
+    <select id="findByIdComment" resultType="Comment">
+        select id, user_name, text, write_date, modify_date, post_id
+        from comment
+        where id = #{id}
+    </select>
+
+    <select id="findByUserId" resultType="Comment">
+        select id, user_name, text, write_date, modify_date, post_id
+        from comment
+        where id = #{userId}
+    </select>
+
+    <select id="findByPostId" resultType="Comment">
+        select id, user_name, text, write_date, modify_date, post_id
+        from comment
+        where id = #{postId}
+    </select>
+
+    <insert id="saveComment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment(user_name, text, write_date, modify_date, post_id)
+        values (#{userName}, #{text}, #{writeDate}, #{modifyDate}, #{postId})
+    </insert>
+
+    <delete id="removeComment">
+        delete form comment
+        where id = #{id}
+    </delete>
+
+    <update id="update">
+        update comment
+        set text = #{text}
+            modify_date = #{modifyDate}
+        where id = #{id}
+    </update>
+
+</mapper>
