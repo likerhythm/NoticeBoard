@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Repository
+//@Repository
 public class MemoryCommentRepository {
 
     private static final Map<Long, Comment> store = new HashMap<>();

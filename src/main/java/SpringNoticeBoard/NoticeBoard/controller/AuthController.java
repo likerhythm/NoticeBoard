@@ -49,8 +49,10 @@ public class AuthController {
     public String login(@ModelAttribute @Validated LoginForm loginForm,
                         BindingResult bindingResult,
                         HttpServletRequest request,
-                        @RequestParam(defaultValue = "/main") String redirectURL) {
+                        @RequestParam(defaultValue = "/main", value = "redirectURL")
+                            String redirectURL) {
 
+        log.info("[POST /login]");
         if (hasBindingError(bindingResult)) {
             return "/loginForm";
         }

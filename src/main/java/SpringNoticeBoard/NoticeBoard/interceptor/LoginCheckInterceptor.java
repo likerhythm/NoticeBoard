@@ -23,6 +23,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         //로그인 상태가 아닌 경우
         if (session == null || session.getAttribute(SessionConst.LOGIN_USER) == null) {
             if (!requestURI.startsWith("/post") || "/post/save".equals(requestURI)) {
+                log.info("not login");
                 response.sendRedirect("/login?redirectURL=" + requestURI);
                 return false;
             }

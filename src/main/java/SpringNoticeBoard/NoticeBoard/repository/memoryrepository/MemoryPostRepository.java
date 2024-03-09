@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 @Slf4j
-@Repository
+//@Repository
 public class MemoryPostRepository {
 
     private static final Map<Long, Post> store = new HashMap<>();

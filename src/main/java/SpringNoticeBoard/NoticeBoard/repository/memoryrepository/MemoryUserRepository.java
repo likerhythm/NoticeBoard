@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Slf4j
-@Repository
+//@Repository
 public class MemoryUserRepository {
 
     private static final Map<Long, User> store = new HashMap<>();
